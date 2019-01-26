@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5548628224767621887}
   - component: {fileID: 1313408240104547573}
+  - component: {fileID: 8415934649346076993}
   m_Layer: 0
   m_Name: SquareTile
   m_TagString: Untagged
@@ -79,3 +80,16 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &8415934649346076993
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7034764169658088252}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9141843019862784fab1f8c3422ec305, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  visibile: 1

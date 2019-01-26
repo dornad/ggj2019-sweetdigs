@@ -9,7 +9,10 @@ public class GameController : MonoBehaviour {
 
 	public GameObject tile;
 
-	public TileController[,] tr;
+
+	public Vector2 gridSize;
+
+	public TileController[,] tc;
 
 
 
@@ -26,6 +29,14 @@ public class GameController : MonoBehaviour {
     // Start is called before the first frame update
     void Start() {
     	
+		for (int i=0; i<gridSize.x; i++) {
+			for (int j=0; j<gridSize.y; j++) {
+				GameObject go = Instantiate(tile);
+				TileController cont = go.GetComponent<TileController>();
+				cont.loc.x = i;
+				cont.loc.y = j;
+			}
+		}
 
 
     }

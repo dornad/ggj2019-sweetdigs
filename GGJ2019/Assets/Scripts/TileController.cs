@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class TileController : MonoBehaviour {
     
-	public bool visibile = true;
+	public bool visible = true;
+
+	public Vector2 loc;
 
 	private SpriteRenderer sr;
 
@@ -12,11 +14,22 @@ public class TileController : MonoBehaviour {
     void Start() {
 		sr = GetComponent<SpriteRenderer>();
         
+
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        
+    void Update() {
+
+		this.transform.position = new Vector3(loc.x, loc.y, 0);
+
+
+		//sr.enabled = visible;
+		/*
+		if (!visible) {
+			sr.Color = Color.transparant;
+		} else {
+			sr.Color = Color.red;
+		}
+		*/
     }
 }
