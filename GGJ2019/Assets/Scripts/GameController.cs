@@ -47,20 +47,36 @@ public class GameController : MonoBehaviour {
 			}
 		}
 		else {
+			// required...
 			string boardString = level.text.Trim();
-			// get the rows
 			char[] lineDelimiter = { '\n' };
-			string[] rowStrings = boardString.Split(lineDelimiter);
-			// get number of columns
-			int rows = rowStrings.Length;
 			char[] columnDelimiter = { ',' };
+			string[] rowStrings = boardString.Split(lineDelimiter);
 
-			string row = rowStrings[0];
-			string[] elements = row.Split(columnDelimiter);
-			int numElements = elements.Length;
+			// Get the number of rows and columns
+			int numRows = rowStrings.Length;
+			int numColumns = rowStrings[0].Split(columnDelimiter).Length; // assuming data structure is not jaggy
 
-			for (int i = 0; i < numElements; i++) {
-				Debug.Log("element at (0," + i + ") = " + elements[i]);
+			// START
+			tcArray = new TileController[numRows, numColumns];
+			for (int i = 0; i < numRows; i++)
+			{
+				string row = rowStrings[i];
+				string[] elements = row.Split(columnDelimiter);
+				for (int j = 0; j < numColumns; j++)
+				{
+					string element = elements[j];
+					Debug.Log("element at ("+ i + ", " + j + ") = " + element);
+
+					GameObject go = Instantiate(tile);
+					TileController cont = go.GetComponent<TileController>();
+					tcArray[i,j]= cont;
+					cont.loc.x = i;
+					cont.loc.y = j;
+					cont.r = Random.Range((float)0, float.Parse(element));
+					cont.g = Random.Range((float)0, float.Parse(element));
+					cont.b = Random.Range((float)0, float.Parse(element));
+				}
 			}
 		}
     }

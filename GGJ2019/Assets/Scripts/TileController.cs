@@ -8,9 +8,9 @@ public class TileController : MonoBehaviour {
 
 	public Vector2 loc;
 
-	public float r;
-	public float g;
-	public float b;
+	public float r = 0;
+	public float g = 0;
+	public float b = 0;
 
 
 	private SpriteRenderer sr;
