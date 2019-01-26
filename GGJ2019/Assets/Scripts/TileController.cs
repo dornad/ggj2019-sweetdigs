@@ -54,22 +54,22 @@ public class TileController : MonoBehaviour {
 		// }
 
 		if (tileType == 0) {
-			sr.color = Color.red;
+			sr.color = Color.grey;
 		}
 		else if (tileType == 1) {
-			sr.color = Color.blue;
+			sr.color = Color.yellow;
 		}
 		else if (tileType == 2) {
-			sr.color = Color.green;
-		}
-		else if (tileType == 3) {
-			sr.color = Color.magenta;
-		}
-		else if (tileType == 4) {
 			sr.color = Color.cyan;
 		}
+		else if (tileType == 3) {
+			sr.color = Color.red;
+		}
+		else if (tileType == 4) {
+			sr.color = Color.magenta;
+		}
 		else {
-			sr.color = Color.black;
+			sr.color = Color.magenta;
 		}
 	}
 }
