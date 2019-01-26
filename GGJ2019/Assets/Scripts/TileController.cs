@@ -14,6 +14,8 @@ public class TileController : MonoBehaviour {
 
 	public Vector2 loc;
 
+	public int tileType;
+
 	public float r = 0;
 	public float g = 0;
 	public float b = 0;
@@ -46,7 +48,7 @@ public class TileController : MonoBehaviour {
     }
 
 	private void parseType() {
-		int tileType = type % 10;
+		tileType = type % 10;
 
 		// try {
 		// 	sr.sprite = sprites[tileType];
