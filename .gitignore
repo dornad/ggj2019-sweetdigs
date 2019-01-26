@@ -13,6 +13,7 @@
 
 # Visual Studio cache directory
 .vs/
+.vscode/
 
 # Gradle cache directory
 .gradle/
@@ -48,6 +49,8 @@ sysinfo.txt
 # Crashlytics generated file
 Assets/StreamingAssets/crashlytics-build.properties
 
+# DS_Ignore (macOS)
+.DS_Store
 
 # End of https://www.gitignore.io/api/unity
 
