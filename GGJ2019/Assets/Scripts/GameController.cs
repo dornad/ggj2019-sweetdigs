@@ -17,7 +17,7 @@ public class GameController : MonoBehaviour {
 	public static int rows;
 	public static int columns;
 
-
+    public PlayerController pc;
 
 
 	void Awake() {
@@ -28,6 +28,8 @@ public class GameController : MonoBehaviour {
 			//Destroy if it exists already.
 			//GameObject.Destroy(this.gameObject);
 		}
+
+        pc = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
 	}
 
     // Start is called before the first frame update
@@ -90,6 +92,12 @@ public class GameController : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
+        
+    }
+
+    public void loseGame() {
+        // Do other stuff
+        pc.die();
         
     }
 }
