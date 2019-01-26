@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour {
     // Start is called before the first frame update
     void Start() {
         // Store reference to attached controller
-        position = new Vector3(2,2,0);
+        position = new Vector3(13,8,0);
     }
 
     // Update is called once per frame
