@@ -8,12 +8,12 @@ public class PlayerController : MonoBehaviour {
 
     public Vector3 position;
 
-    private bool isMoving;
+    private bool isMoving = false;
 
     // Start is called before the first frame update
     void Start() {
         // Store reference to attached controller
-        position = new Vector3(2,2,0);
+        position = new Vector3(13,8,0);
     }
 
     // Update is called once per frame
@@ -31,18 +31,41 @@ public class PlayerController : MonoBehaviour {
     // }
 
     public void changePosition() {
+
+        /*
+            make (static public) tilecontroller accessible to PlayerController.
+            find "next" tile
+            change move speed according to type of tile.
+            if fn in tile --> move player 
+            pick up hat
+         */
+
+        TileController[,] tiles = GameController.tcArray;
+
+        int toX = 0;
+        int toY = 0;
+
         if (Input.GetKeyDown("w")) {
-            StartCoroutine(Move((int)position.x, (int)position.y+1, this.moveSpeed));
+            toY = 1;
         }
         else if (Input.GetKeyDown("a")) {
-            StartCoroutine(Move((int)position.x-1, (int)position.y, this.moveSpeed));
+            toX = -1;
         }
         else if (Input.GetKeyDown("s")) {
-            StartCoroutine(Move((int)position.x, (int)position.y-1, this.moveSpeed));
+            toY = -1;
         }
         else if (Input.GetKeyDown("d")) {
-            StartCoroutine(Move((int)position.x+1, (int)position.y, this.moveSpeed));
+            toX = 1;            
         }
+
+        if (Mathf.Abs(toX) > 0 || Mathf.Abs(toY) > 0) {
+            Vector2Int toPosition = new Vector2Int((int)position.x + toX, (int) position.y + toY);
+            // TileController tc = tiles[toPosition.x, toPosition.y];
+            // tc.
+
+            StartCoroutine(Move((int)toPosition.x, (int)toPosition.y, this.moveSpeed));
+        }
+        
     }
 
     public IEnumerator Move(float x, float y, float speed) {

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class TileController : MonoBehaviour {
+
+	public static TileController tileController;
     
 	public int type=0;
 
@@ -53,23 +55,23 @@ public class TileController : MonoBehaviour {
 
 		// }
 
-		if (tileType == 0) {
-			sr.color = Color.red;
+		if (tileType == Globals.DIRT) {
+			sr.color = Color.grey;
 		}
-		else if (tileType == 1) {
-			sr.color = Color.blue;
+		else if (tileType == Globals.TUNNEL) {
+			sr.color = Color.yellow;
 		}
-		else if (tileType == 2) {
-			sr.color = Color.green;
-		}
-		else if (tileType == 3) {
-			sr.color = Color.magenta;
-		}
-		else if (tileType == 4) {
+		else if (tileType == Globals.ROCK) {
 			sr.color = Color.cyan;
 		}
+		else if (tileType == Globals.TOUGH_DIRT) {
+			sr.color = Color.red;
+		}
+		else if (tileType == 4) {
+			sr.color = Color.magenta;
+		}
 		else {
-			sr.color = Color.black;
+			sr.color = Color.magenta;
 		}
 	}
 }

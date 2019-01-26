@@ -157,7 +157,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tile: {fileID: 7034764169658088252, guid: c12b6203732b8054d844637e002341c9, type: 3}
   gridSize: {x: 2, y: 4}
-  levelFile: level
+  levelFile: GGJ19 Level input csv - Level
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -169,6 +169,7 @@ GameObject:
   - component: {fileID: 519420032}
   - component: {fileID: 519420031}
   - component: {fileID: 519420029}
+  - component: {fileID: 519420030}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -184,6 +185,18 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_Enabled: 1
+--- !u!114 &519420030
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70eada1207f23f4468550fad18ab74fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
@@ -270,7 +283,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5aaca41847dc4c90944b4a738ad201a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 3
+  moveSpeed: 4
   position: {x: 0, y: 0, z: 0}
 --- !u!212 &2057005591
 SpriteRenderer:
@@ -308,7 +321,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 100
   m_Sprite: {fileID: 21300000, guid: add35ed7ee8a4b74d86b6ee60b24f128, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -405,11 +418,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8415934649346076993, guid: c12b6203732b8054d844637e002341c9,
-        type: 3}
-      propertyPath: sprites.Array.size
-      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8415934649346076993, guid: c12b6203732b8054d844637e002341c9,
         type: 3}
