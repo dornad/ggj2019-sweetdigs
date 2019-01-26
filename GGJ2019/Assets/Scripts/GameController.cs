@@ -12,7 +12,7 @@ public class GameController : MonoBehaviour {
 
 	public Vector2 gridSize;
 
-	public TileController[,] tc;
+	public TileController[,] tcArray;
 
 
 
@@ -21,18 +21,19 @@ public class GameController : MonoBehaviour {
 			GameController.controller = this;
 		}
 		else {
-			// Destroy if it exists already.
-			// this.gameObject;
+			//Destroy if it exists already.
+			//GameObject.Destroy(this.gameObject);
 		}
 	}
 
     // Start is called before the first frame update
     void Start() {
-    	
+    	tcArray = new TileController[(int)gridSize.x, (int)gridSize.y]; 
 		for (int i=0; i<gridSize.x; i++) {
 			for (int j=0; j<gridSize.y; j++) {
 				GameObject go = Instantiate(tile);
 				TileController cont = go.GetComponent<TileController>();
+                tcArray[i,j]= cont;
 				cont.loc.x = i;
 				cont.loc.y = j;
 			}

@@ -8,11 +8,21 @@ public class TileController : MonoBehaviour {
 
 	public Vector2 loc;
 
+	public float r;
+	public float g;
+	public float b;
+
+
 	private SpriteRenderer sr;
 
 	// Start is called before the first frame update
     void Start() {
 		sr = GetComponent<SpriteRenderer>();
+		r = Random.Range((float)0, (float)1);
+		g = Random.Range((float)0, (float)1);
+		b = Random.Range((float)0, (float)1);
+		sr.color = new Color(r,g, b, 1);
+		// sr.color = Color.blue;
         
 
     }
