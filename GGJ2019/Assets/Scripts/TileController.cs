@@ -23,7 +23,6 @@ public class TileController : MonoBehaviour {
 		b = Random.Range((float)0, (float)1);
 		sr.color = new Color(r,g, b, 1);
 		// sr.color = Color.blue;
-        
 
     }
 
