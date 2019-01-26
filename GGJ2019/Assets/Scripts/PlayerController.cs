@@ -61,7 +61,7 @@ public class PlayerController : MonoBehaviour {
         if (Mathf.Abs(toX) > 0 || Mathf.Abs(toY) > 0) {
             Vector2Int toPosition = new Vector2Int((int)position.x + toX, (int) position.y + toY);
             
-            if (toPosition.x >= 0 && toPosition.y >=0 && toPosition.x < GameController.rows && toPosition.y < GameController.columns) {
+            if (toPosition.x >= 0 && toPosition.y >=0 && toPosition.y < GameController.rows && toPosition.x < GameController.columns) {
                 
                 TileController tc = tiles[toPosition.x, toPosition.y];            
                 if (tc.tileType != Globals.ROCK) {
