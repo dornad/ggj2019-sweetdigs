@@ -14,6 +14,10 @@ public class GameController : MonoBehaviour {
 
 	public static TileController[,] tcArray;
 
+	public static int rows;
+	public static int columns;
+
+
 
 
 	void Awake() {
@@ -56,6 +60,9 @@ public class GameController : MonoBehaviour {
 			// Get the number of rows and columns
 			int numRows = rowStrings.Length;
 			int numColumns = rowStrings[0].Split(columnDelimiter).Length; // assuming data structure is not jaggy
+			
+			GameController.rows = numRows;
+			GameController.columns = numColumns;
 			// print(numRows);
 			// print(numColumns);
 			// START

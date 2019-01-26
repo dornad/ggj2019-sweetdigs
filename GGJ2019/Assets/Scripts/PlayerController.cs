@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
 
-    public float moveSpeed = 1;
+    public float moveSpeed = 3;
 
     public Vector3 position;
 
@@ -60,12 +60,29 @@ public class PlayerController : MonoBehaviour {
 
         if (Mathf.Abs(toX) > 0 || Mathf.Abs(toY) > 0) {
             Vector2Int toPosition = new Vector2Int((int)position.x + toX, (int) position.y + toY);
-            // TileController tc = tiles[toPosition.x, toPosition.y];
-            // tc.
+            
+            if (toPosition.x >= 0 && toPosition.y >=0 && toPosition.x < GameController.rows && toPosition.y < GameController.columns) {
+                
+                TileController tc = tiles[toPosition.x, toPosition.y];            
+                if (tc.tileType != Globals.ROCK) {
+                    float speed = findSpeedMultipler(tc);
+                    StartCoroutine(Move((int)toPosition.x, (int)toPosition.y, speed));
+                }
+            }
+        }        
+    }
 
-            StartCoroutine(Move((int)toPosition.x, (int)toPosition.y, this.moveSpeed));
-        }
-        
+    private float findSpeedMultipler(TileController tc) {
+        switch (tc.tileType) {
+            case Globals.DIRT:
+                return this.moveSpeed * 0.5f;
+            case Globals.TUNNEL:
+                return this.moveSpeed;
+            case Globals.TOUGH_DIRT:
+                return this.moveSpeed * 0.25f;             
+            default:
+                return this.moveSpeed;
+        }        
     }
 
     public IEnumerator Move(float x, float y, float speed) {
