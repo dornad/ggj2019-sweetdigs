@@ -14,8 +14,6 @@ public class WobbleMovement : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-      //float wobble =  Random.Range(-9,9);
-      //transform.position = new Vector3(-9, 9, wobble);
 
     if (increasing) {
       wobble += Time.deltaTime;

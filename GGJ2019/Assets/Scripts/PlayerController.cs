@@ -15,7 +15,7 @@ public class PlayerController : MonoBehaviour {
     // Start is called before the first frame update
     void Start() {
         // Store reference to attached controller
-        position = new Vector3(13,8,0);
+        position = startPosition;
     }
 
     // Update is called once per frame
@@ -23,7 +23,7 @@ public class PlayerController : MonoBehaviour {
         if (!isMoving) {
             changePosition();
         }
-        this.transform.position = startPosition;
+        this.transform.position = position;
 
     }
 
