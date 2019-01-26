@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class TileController : MonoBehaviour {
     
+	public int type=0;
+
+	public Sprite[] sprites;
+
 	public bool visible = true;
 
 	public Vector2 loc;
@@ -18,10 +22,7 @@ public class TileController : MonoBehaviour {
 	// Start is called before the first frame update
     void Start() {
 		sr = GetComponent<SpriteRenderer>();
-		r = Random.Range((float)0, (float)1);
-		g = Random.Range((float)0, (float)1);
-		b = Random.Range((float)0, (float)1);
-		sr.color = new Color(r,g, b, 1);
+		parseType();
 		// sr.color = Color.blue;
 
     }
@@ -41,4 +42,34 @@ public class TileController : MonoBehaviour {
 		}
 		*/
     }
+
+	private void parseType() {
+		int tileType = type % 10;
+
+		// try {
+		// 	sr.sprite = sprites[tileType];
+		// }
+		// catch {
+
+		// }
+
+		if (tileType == 0) {
+			sr.color = Color.red;
+		}
+		else if (tileType == 1) {
+			sr.color = Color.blue;
+		}
+		else if (tileType == 2) {
+			sr.color = Color.green;
+		}
+		else if (tileType == 3) {
+			sr.color = Color.magenta;
+		}
+		else if (tileType == 4) {
+			sr.color = Color.cyan;
+		}
+		else {
+			sr.color = Color.black;
+		}
+	}
 }
