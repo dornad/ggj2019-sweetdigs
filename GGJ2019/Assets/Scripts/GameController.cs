@@ -47,17 +47,21 @@ public class GameController : MonoBehaviour {
 			}
 		}
 		else {
-			string boardString = boardFile.text.Trim();
+			string boardString = level.text.Trim();
+			// get the rows
 			char[] lineDelimiter = { '\n' };
 			string[] rowStrings = boardString.Split(lineDelimiter);
-			int rows = rowStrings.length;
+			// get number of columns
+			int rows = rowStrings.Length;
 			char[] columnDelimiter = { ',' };
-			int columns = boardString.Split(columnDelimiter);
-			for (i=0; i<rows; i++) {
 
+			string row = rowStrings[0];
+			string[] elements = row.Split(columnDelimiter);
+			int numElements = elements.Length;
 
+			for (int i = 0; i < numElements; i++) {
+				Debug.Log("element at (0," + i + ") = " + elements[i]);
 			}
-
 		}
     }
 
