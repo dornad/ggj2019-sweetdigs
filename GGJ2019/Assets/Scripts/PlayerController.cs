@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
 
-    public float moveSpeed = 1;
+    public float moveSpeed = 3;
 
     public Vector3 position;
 
@@ -60,25 +60,52 @@ public class PlayerController : MonoBehaviour {
 
         if (Mathf.Abs(toX) > 0 || Mathf.Abs(toY) > 0) {
             Vector2Int toPosition = new Vector2Int((int)position.x + toX, (int) position.y + toY);
-            // TileController tc = tiles[toPosition.x, toPosition.y];
-            // tc.
-
-            StartCoroutine(Move((int)toPosition.x, (int)toPosition.y, this.moveSpeed));
-        }
-        
+            
+            if (toPosition.x >= 0 && toPosition.y >=0 && toPosition.y < GameController.rows && toPosition.x < GameController.columns) {
+                
+                TileController tc = tiles[toPosition.x, toPosition.y];            
+                if (tc.tileType != Globals.ROCK) {
+                    float speed = findSpeedMultipler(tc);
+                    StartCoroutine(Move(tc, (int)toPosition.x, (int)toPosition.y, speed));
+                }
+            }
+        }        
     }
 
-    public IEnumerator Move(float x, float y, float speed) {
+    private float findSpeedMultipler(TileController tc) {
+        switch (tc.tileType) {
+            case Globals.DIRT:
+                return this.moveSpeed * 0.5f;
+            case Globals.TUNNEL:
+                return this.moveSpeed;
+            case Globals.TOUGH_DIRT:
+                return this.moveSpeed * 0.25f;             
+            default:
+                return this.moveSpeed;
+        }        
+    }
+
+    public IEnumerator Move(TileController tC, float x, float y, float speed) {
         isMoving = true;
         Vector3 startPosition = new Vector3(position.x, position.y, 0);
-        Vector3 endPosition = new Vector3(x, y, 0);
-        // float pos =0;
+        Vector3 endPosition = new Vector3(x, y, 0);        
+        bool hasUpdated = false;
+
         for (float i =0; i<1; i += speed * Time.deltaTime) {
             position = Vector3.Lerp(startPosition, endPosition, i);
+            
+            if (i > 0.65 && !hasUpdated) {
+                hasUpdated = true;                
+                tC.updateTile(this);
+            }
+
             yield return null;
         }
         position = endPosition;
         isMoving = false;
+    }
 
+    public void activateItem(int itemType) {
+        // NO-OP
     }
 }

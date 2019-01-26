@@ -14,6 +14,8 @@ public class TileController : MonoBehaviour {
 
 	public Vector2 loc;
 
+	public int tileType;
+
 	public float r = 0;
 	public float g = 0;
 	public float b = 0;
@@ -46,15 +48,11 @@ public class TileController : MonoBehaviour {
     }
 
 	private void parseType() {
-		int tileType = type % 10;
+		tileType = type % 10;
+		applyTileType();
+	}
 
-		// try {
-		// 	sr.sprite = sprites[tileType];
-		// }
-		// catch {
-
-		// }
-
+	private void applyTileType() {
 		if (tileType == Globals.DIRT) {
 			sr.color = Color.grey;
 		}
@@ -73,5 +71,13 @@ public class TileController : MonoBehaviour {
 		else {
 			sr.color = Color.magenta;
 		}
+	}
+
+	public void updateTile(PlayerController pc) {
+		if (this.tileType == Globals.DIRT || this.tileType == Globals.TOUGH_DIRT) {
+			// dirt || tought_dirt -> tunnel
+			this.tileType = Globals.TUNNEL;
+			applyTileType();
+		} 
 	}
 }
