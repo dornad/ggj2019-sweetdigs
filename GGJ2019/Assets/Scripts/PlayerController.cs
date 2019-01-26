@@ -8,6 +8,8 @@ public class PlayerController : MonoBehaviour {
 
     public Vector3 position;
 
+    public Vector3 startPosition;
+
     private bool isMoving = false;
 
     // Start is called before the first frame update
@@ -21,7 +23,7 @@ public class PlayerController : MonoBehaviour {
         if (!isMoving) {
             changePosition();
         }
-        this.transform.position = new Vector3(position.x, position.y, 0);
+        this.transform.position = startPosition;
 
     }
 
@@ -87,12 +89,12 @@ public class PlayerController : MonoBehaviour {
 
     public IEnumerator Move(TileController tC, float x, float y, float speed) {
         isMoving = true;
-        Vector3 startPosition = new Vector3(position.x, position.y, 0);
-        Vector3 endPosition = new Vector3(x, y, 0);        
+        Vector3 startMovePosition = new Vector3(position.x, position.y, 0);
+        Vector3 endMovePosition = new Vector3(x, y, 0);        
         bool hasUpdated = false;
 
         for (float i =0; i<1; i += speed * Time.deltaTime) {
-            position = Vector3.Lerp(startPosition, endPosition, i);
+            position = Vector3.Lerp(startMovePosition, endMovePosition, i);
             
             if (i > 0.65 && !hasUpdated) {
                 hasUpdated = true;                
@@ -101,7 +103,7 @@ public class PlayerController : MonoBehaviour {
 
             yield return null;
         }
-        position = endPosition;
+        position = endMovePosition;
         isMoving = false;
     }
 
