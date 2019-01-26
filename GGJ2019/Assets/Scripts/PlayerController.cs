@@ -66,7 +66,7 @@ public class PlayerController : MonoBehaviour {
                 TileController tc = tiles[toPosition.x, toPosition.y];            
                 if (tc.tileType != Globals.ROCK) {
                     float speed = findSpeedMultipler(tc);
-                    StartCoroutine(Move((int)toPosition.x, (int)toPosition.y, speed));
+                    StartCoroutine(Move(tc, (int)toPosition.x, (int)toPosition.y, speed));
                 }
             }
         }        
@@ -85,17 +85,27 @@ public class PlayerController : MonoBehaviour {
         }        
     }
 
-    public IEnumerator Move(float x, float y, float speed) {
+    public IEnumerator Move(TileController tC, float x, float y, float speed) {
         isMoving = true;
         Vector3 startPosition = new Vector3(position.x, position.y, 0);
-        Vector3 endPosition = new Vector3(x, y, 0);
-        // float pos =0;
+        Vector3 endPosition = new Vector3(x, y, 0);        
+        bool hasUpdated = false;
+
         for (float i =0; i<1; i += speed * Time.deltaTime) {
             position = Vector3.Lerp(startPosition, endPosition, i);
+            
+            if (i > 0.65 && !hasUpdated) {
+                hasUpdated = true;                
+                tC.updateTile(this);
+            }
+
             yield return null;
         }
         position = endPosition;
         isMoving = false;
+    }
 
+    public void activateItem(int itemType) {
+        // NO-OP
     }
 }
