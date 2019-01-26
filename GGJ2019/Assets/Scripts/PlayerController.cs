@@ -8,12 +8,14 @@ public class PlayerController : MonoBehaviour {
 
     public Vector3 position;
 
+    public Vector3 startPosition;
+
     private bool isMoving = false;
 
     // Start is called before the first frame update
     void Start() {
         // Store reference to attached controller
-        position = new Vector3(13,8,0);
+        position = startPosition;
     }
 
     // Update is called once per frame
@@ -21,7 +23,7 @@ public class PlayerController : MonoBehaviour {
         if (!isMoving) {
             changePosition();
         }
-        this.transform.position = new Vector3(position.x, position.y, 0);
+        this.transform.position = position;
 
     }
 
@@ -66,7 +68,7 @@ public class PlayerController : MonoBehaviour {
                 TileController tc = tiles[toPosition.x, toPosition.y];            
                 if (tc.tileType != Globals.ROCK) {
                     float speed = findSpeedMultipler(tc);
-                    StartCoroutine(Move((int)toPosition.x, (int)toPosition.y, speed));
+                    StartCoroutine(Move(tc, (int)toPosition.x, (int)toPosition.y, speed));
                 }
             }
         }        
@@ -85,17 +87,27 @@ public class PlayerController : MonoBehaviour {
         }        
     }
 
-    public IEnumerator Move(float x, float y, float speed) {
+    public IEnumerator Move(TileController tC, float x, float y, float speed) {
         isMoving = true;
-        Vector3 startPosition = new Vector3(position.x, position.y, 0);
-        Vector3 endPosition = new Vector3(x, y, 0);
-        // float pos =0;
+        Vector3 startMovePosition = new Vector3(position.x, position.y, 0);
+        Vector3 endMovePosition = new Vector3(x, y, 0);        
+        bool hasUpdated = false;
+
         for (float i =0; i<1; i += speed * Time.deltaTime) {
-            position = Vector3.Lerp(startPosition, endPosition, i);
+            position = Vector3.Lerp(startMovePosition, endMovePosition, i);
+            
+            if (i > 0.65 && !hasUpdated) {
+                hasUpdated = true;                
+                tC.updateTile(this);
+            }
+
             yield return null;
         }
-        position = endPosition;
+        position = endMovePosition;
         isMoving = false;
+    }
 
+    public void activateItem(int itemType) {
+        // NO-OP
     }
 }
