@@ -2,39 +2,60 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
-{
-    public Vector2 position;
+public class PlayerController : MonoBehaviour {
+
+    public float moveSpeed = 1;
+
+    public Vector3 position;
+
+    private bool isMoving;
 
     // Start is called before the first frame update
     void Start() {
         // Store reference to attached controller
-        position = new Vector2(2,2);
+        position = new Vector3(2,2,0);
     }
 
     // Update is called once per frame
     void Update() {
-        changePosition();
-        move();
+        if (!isMoving) {
+            changePosition();
+        }
+        this.transform.position = new Vector3(position.x, position.y, 0);
+
     }
 
-    public void move() {
-        // NEXT: Vector2.Lerp + time.deltaTime
-        this.transform.position = new Vector3(position.x, position.y, 0);
-    }
+    // public void move() {
+    //     // NEXT: Vector2.Lerp + time.deltaTime
+    //     this.transform.position = new Vector3(position.x, position.y, 0);
+    // }
 
     public void changePosition() {
         if (Input.GetKeyDown("w")) {
-            position.y++;
+            StartCoroutine(Move((int)position.x, (int)position.y+1, this.moveSpeed));
         }
         else if (Input.GetKeyDown("a")) {
-            position.x--;
+            StartCoroutine(Move((int)position.x-1, (int)position.y, this.moveSpeed));
         }
         else if (Input.GetKeyDown("s")) {
-            position.y--;
+            StartCoroutine(Move((int)position.x, (int)position.y-1, this.moveSpeed));
         }
         else if (Input.GetKeyDown("d")) {
-            position.x++;
+            StartCoroutine(Move((int)position.x+1, (int)position.y, this.moveSpeed));
         }
+    }
+
+    public IEnumerator Move(float x, float y, float speed) {
+        isMoving = true;
+        Vector3 startPosition = new Vector3(position.x, position.y, 0);
+        Vector3 endPosition = new Vector3(x, y, 0);
+        // float pos =0;
+        for (float i =0; i<1; i += speed * Time.deltaTime) {
+            position = Vector3.Lerp(startPosition, endPosition, i);
+            yield return null;
+        }
+        position = endPosition;
+        isMoving = false;
+
     }
 }
