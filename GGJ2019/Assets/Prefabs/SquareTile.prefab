@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8415934649346076993}
   m_Layer: 0
   m_Name: SquareTile
-  m_TagString: Untagged
+  m_TagString: tile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -92,4 +92,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9141843019862784fab1f8c3422ec305, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  visibile: 1
+  visible: 1
+  loc: {x: -1.5, y: -1.5}
+  r: 0
+  g: 0
+  b: 0
