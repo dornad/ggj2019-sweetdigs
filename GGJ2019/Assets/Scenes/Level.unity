@@ -270,7 +270,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5aaca41847dc4c90944b4a738ad201a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  position: {x: 0, y: 0}
+  moveSpeed: 3
+  position: {x: 0, y: 0, z: 0}
 --- !u!212 &2057005591
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -308,15 +309,15 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 289f813681a2546a7a294e412bc3b736, type: 3}
+  m_Sprite: {fileID: 21300000, guid: add35ed7ee8a4b74d86b6ee60b24f128, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 3.5, y: 4.01}
+  m_Size: {x: 0.875, y: 1.0025}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &2057005592
@@ -404,6 +405,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8415934649346076993, guid: c12b6203732b8054d844637e002341c9,
+        type: 3}
+      propertyPath: sprites.Array.size
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8415934649346076993, guid: c12b6203732b8054d844637e002341c9,
         type: 3}

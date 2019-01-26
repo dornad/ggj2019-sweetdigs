@@ -12,7 +12,7 @@ public class GameController : MonoBehaviour {
 
 	public string levelFile;
 
-	public TileController[,] tcArray;
+	public static TileController[,] tcArray;
 
 
 
@@ -62,7 +62,6 @@ public class GameController : MonoBehaviour {
 			tcArray = new TileController[numColumns, numRows];
 			for (int i = numRows-1; i >= 0; i--) {
 				string row = rowStrings[numRows-(i+1)];
-				print(row);
 				string[] elements = row.Split(columnDelimiter);
 				for (int j = 0; j < numColumns; j++) {
 					string element = elements[j];

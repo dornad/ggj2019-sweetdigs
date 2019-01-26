@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class TileController : MonoBehaviour {
+
+	public static TileController tileController;
     
 	public int type=0;
 
