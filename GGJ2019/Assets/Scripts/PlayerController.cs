@@ -110,4 +110,9 @@ public class PlayerController : MonoBehaviour {
     public void activateItem(int itemType) {
         // NO-OP
     }
+
+    public void die() {
+        // TODO
+
+    }
 }
