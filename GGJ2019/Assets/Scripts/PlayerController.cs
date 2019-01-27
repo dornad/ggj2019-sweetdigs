@@ -9,7 +9,6 @@ public class PlayerController : MonoBehaviour {
     public float toughSpeedMod = 0.5f;
 
     public Vector3 position;
-
     public Vector3 startPosition;
 
     private bool isMoving = false;
@@ -22,12 +21,18 @@ public class PlayerController : MonoBehaviour {
 
     public AudioSource source;
 
+    private Animator animator;
+
 
     // Start is called before the first frame update
     void Start() {
         // Store reference to attached controller
         position = startPosition;
+<<<<<<< HEAD
         source = GetComponent<AudioSource>();
+=======
+        animator = GetComponent<Animator>();
+>>>>>>> 2288672d9aa846bc6c5f9fb2492ec584f6b4a1b5
     }
 
     // Update is called once per frame
@@ -88,7 +93,8 @@ public class PlayerController : MonoBehaviour {
                 TileController tc = tiles[toPosition.x, toPosition.y];            
                 if (tc.tileType != Globals.ROCK && (!this.hasItem() || !tc.hasItem() )) {
                     float speed = findSpeedMultipler(tc);
-                    StartCoroutine(Move(tc, (int)toPosition.x, (int)toPosition.y, speed));
+                    bool isDigging = findIfDigging(tc);
+                    StartCoroutine(Move(tc, (int)toPosition.x, (int)toPosition.y, speed, isDigging));
                 }
             }
         }        
@@ -107,11 +113,30 @@ public class PlayerController : MonoBehaviour {
         }        
     }
 
-    public IEnumerator Move(TileController tC, float x, float y, float speed) {
+    private bool findIfDigging(TileController tc)
+    {
+        switch (tc.tileType)
+        {
+            case Globals.DIRT:
+                return true;
+            case Globals.TUNNEL:
+                return false;
+            case Globals.TOUGH_DIRT:
+                return true;
+            default:
+                return false;
+        }
+    }
+
+    public IEnumerator Move(TileController tC, float x, float y, float speed, bool isDigging) {
         isMoving = true;
         Vector3 startMovePosition = new Vector3(position.x, position.y, 0);
         Vector3 endMovePosition = new Vector3(x, y, 0);        
         bool hasUpdated = false;
+        //start anim
+        animator.SetBool("isDigging", isDigging);
+        animator.SetFloat("xInput", endMovePosition.x - startMovePosition.x);
+        animator.SetFloat("yInput", endMovePosition.y - startMovePosition.y);
 
         for (float i =0; i<1; i += speed * Time.deltaTime) {
             position = Vector3.Lerp(startMovePosition, endMovePosition, i);
@@ -125,6 +150,10 @@ public class PlayerController : MonoBehaviour {
         }
         position = endMovePosition;
         isMoving = false;
+        //end anim
+        animator.SetBool("isDigging", false);
+        //animator.SetFloat("xInput", 0);
+        //animator.SetFloat("yInput", 0);
     }
 
     public void setItemType(int newItemType) {
@@ -155,7 +184,11 @@ public class PlayerController : MonoBehaviour {
         
         if (dropPos.x >= 0 && dropPos.y >=0 && dropPos.y < GameController.rows && dropPos.x < GameController.columns) {
             
-            TileController tc = tiles[dropPos.x, dropPos.y]; 
+
+            
+            GameController.itemLocationsScores.Add(new Vector4(dropPos.x, dropPos.y, 1, this.itemType));
+
+            TileController tc = tiles[dropPos.x, dropPos.y];            
             if (tc.tileType == Globals.TUNNEL && !tc.hasItem() && this.hasItem()) {
                 tc.putItem(this.itemType);
                 this.setItemType(0);
