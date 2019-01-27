@@ -26,6 +26,12 @@ public class GameController : MonoBehaviour {
 	public static int columns;
 
     public PlayerController pc;
+
+	public static bool playerDied = false;	
+
+	// Kinda odd that I use a Vector4, but x, y are for position of item, z is for if it has been touched, and w is for item type
+	public static List<Vector4> itemLocationsScores;
+
 	private PlayfabClient playfabClient;
 
 	public struct ScoreBoardEntry {
@@ -50,7 +56,11 @@ public class GameController : MonoBehaviour {
 		}
 
         pc = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+<<<<<<< HEAD
 		playfabClient = this.GetComponent<PlayfabClient>();
+=======
+		GameController.itemLocationsScores = new List<Vector4>();
+>>>>>>> master
 	}
 
     // Start is called before the first frame update
@@ -103,25 +113,80 @@ public class GameController : MonoBehaviour {
 					cont.loc.y = i;
 					
 					cont.type = int.Parse(element);
-					// cont.r = Random.Range((float)0, float.Parse(element));
-					// cont.g = Random.Range((float)0, float.Parse(element));
-					// cont.b = Random.Range((float)0, float.Parse(element));
+
+					int itemType = (int)(cont.type/10);
+					if (itemType > 0)  {
+						itemLocationsScores.Add(new Vector4(cont.loc.x, cont.loc.y, 0, itemType));
+					}
+
 				}
 			}
             //Bring in the... Kill Zoooone!
-            killzone = Instantiate(killzonePrefab).GetComponent<KillzoneController>();
-            killzone.transform.position = new Vector3(0, 7.5f, killzone.transform.position.z);
+            GameController.killzone = Instantiate(killzonePrefab).GetComponent<KillzoneController>();
+            GameController.killzone.transform.position = new Vector3(0, 7.5f, GameController.killzone.transform.position.z);
         }
     }
 
     // Update is called once per frame
     void Update() {
         //Death Check
-        if (pc.position.x <= killzone.killColumn)
-        {
+		if (!GameController.playerDied) {
+			GameController.score = this.calculateScore();
+		}
+
+        if (pc.position.x <= killzone.killColumn && !GameController.playerDied) {
+			playerDied = true;
             loseGame();
         }
+
+		print(GameController.score);
     }
+
+	private int calculateScore() {
+		int score =0;
+		for (int i=0; i<GameController.itemLocationsScores.Count; i++) {
+			Vector4 item = itemLocationsScores[i];
+			// Only calculate the score on the item if it hasn't been passed
+			if (GameController.killzone.killColumn < item.x) {
+				// Only calculate if it's been touched
+				Vector2 playerPos = new Vector2(this.pc.transform.position.x, this.pc.transform.position.y);
+
+
+				// if (Vector2.Distance(playerPos, new Vector2(item.x, item.y)) < 1) {
+				// 	itemLocationsScores[i] = new Vector4(item.x, item.y, 1, item.w);
+				// 	item.z = 1;
+				// }
+				
+				
+				if (item.z > 0) {
+					if (item.w == 1) {
+						score++;
+					}
+					else if (item.w == 2) {
+						score++;
+					}
+					else if (item.w == 3) {
+						score++;
+					}
+				}
+
+			}
+		}
+
+		if (pc.hasItem()) {
+			if (pc.itemType == 1) {
+				score++;
+			}
+			else if (pc.itemType == 2) {
+				score++;
+			}
+			else if (pc.itemType == 3) {
+				score++;
+			}
+		}
+
+		return score;
+	}
 
     public void loseGame() {
         // Do other stuff
