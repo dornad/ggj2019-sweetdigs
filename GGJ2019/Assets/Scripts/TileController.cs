@@ -77,9 +77,9 @@ public class TileController : MonoBehaviour {
 			sr.sortingOrder = 2;
 		}
 		else if (tileType == Globals.TOUGH_DIRT) {
-			sr.sprite = sprites[0];
-			sr.color = Color.red;
-			sr.sortingOrder = 2;
+			sr.sprite = sprites[3];
+			sr.color = Color.white;
+			sr.sortingOrder = 0;
 		}
 		else if (tileType == 4) {
 			sr.sprite = sprites[0];
@@ -98,11 +98,10 @@ public class TileController : MonoBehaviour {
 		for (int i=0; i<items.Length; i++) {
 			items[i].SetActive(false);
 		}
-
 		
-			if (itemType > 0 && itemType - 1 < items.Length) {
-				items[itemType-1].SetActive(true);
-			}
+		if (itemType > 0 && itemType - 1 < items.Length) {
+			items[itemType-1].SetActive(true);
+		}
 	}
 
 	public void updateTile(PlayerController pc) {
@@ -113,6 +112,15 @@ public class TileController : MonoBehaviour {
 		} 
 		if (this.itemType > 0){
 			pc.setItemType(this.itemType);
+
+			for (int i=0; i< GameController.itemLocationsScores.Count; i++) {
+				Vector4 item = GameController.itemLocationsScores[i];
+				if ((int)item.x == (int)loc.x && (int)item.y == (int)loc.y) {
+					GameController.itemLocationsScores.RemoveAt(i);
+					break;
+				}
+			}
+
 			this.itemType = 0;
 			applyItemType();
 			
