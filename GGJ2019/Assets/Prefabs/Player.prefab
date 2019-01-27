@@ -299,7 +299,7 @@ MonoBehaviour:
   sounds:
   - {fileID: 8300000, guid: 8da796d6818514cabb5c2fe2f837bd88, type: 3}
   - {fileID: 8300000, guid: 734fcbdf42f8e467693b4b810e3ef9f2, type: 3}
-  - {fileID: 0}
+  - {fileID: 8300000, guid: 349d444fc81b44fb78eceef2fae3bad5, type: 3}
   source: {fileID: 0}
 --- !u!95 &1659445989
 Animator:
