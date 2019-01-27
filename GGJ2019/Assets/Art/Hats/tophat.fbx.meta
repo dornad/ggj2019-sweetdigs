@@ -10,7 +10,17 @@ ModelImporter:
     2300000: //RootNode
     3300000: //RootNode
     4300000: polytophat
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: stingray_hat_black
+    second: {fileID: 2100000, guid: ea601af328cfee143bafaadacead2e69, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: stingray_hat_red
+    second: {fileID: 2100000, guid: 93bae30829d735041ab111fd0baa5496, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
