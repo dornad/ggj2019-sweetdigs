@@ -27,6 +27,9 @@ public class PlayerController : MonoBehaviour {
     void Update() {
         if (!isMoving) {
             changePosition();
+            if (Input.GetKeyDown("e")){
+                dropItem();
+            }
         }
         this.transform.position = position;
 
@@ -125,9 +128,27 @@ public class PlayerController : MonoBehaviour {
         this.itemType = newItemType;
     }
 
-public bool hasItem(){ 
-    return this.itemType > 0;
-}
+    public bool hasItem(){ 
+        return this.itemType > 0;
+    }
+
+    public void dropItem(){
+
+        TileController[,] tiles = GameController.tcArray;
+
+
+        Vector2Int dropPos = new Vector2Int((int)position.x, (int) position.y - 1);
+        
+        if (dropPos.x >= 0 && dropPos.y >=0 && dropPos.y < GameController.rows && dropPos.x < GameController.columns) {
+            
+            TileController tc = tiles[dropPos.x, dropPos.y];            
+            if (tc.tileType == Globals.TUNNEL && !tc.hasItem() ) {
+                tc.putItem(this.itemType);
+                this.setItemType(0);
+            }
+        }
+        
+    }
 
 
     public void die() {
