@@ -256,6 +256,10 @@ MonoBehaviour:
   moveSpeed: 4
   position: {x: 0, y: 0, z: 0}
   startPosition: {x: 13, y: 8, z: 0}
+  items:
+  - {fileID: 6703040460802994522}
+  - {fileID: 4260400016206723426}
+  - {fileID: 1265430532572298974}
 --- !u!1 &6703040460802994522
 GameObject:
   m_ObjectHideFlags: 0

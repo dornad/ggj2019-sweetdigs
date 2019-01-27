@@ -12,6 +12,11 @@ public class PlayerController : MonoBehaviour {
 
     private bool isMoving = false;
 
+    public int itemType = 0; 
+
+    public GameObject[] items;
+
+
     // Start is called before the first frame update
     void Start() {
         // Store reference to attached controller
@@ -66,7 +71,7 @@ public class PlayerController : MonoBehaviour {
             if (toPosition.x >= 0 && toPosition.y >=0 && toPosition.y < GameController.rows && toPosition.x < GameController.columns) {
                 
                 TileController tc = tiles[toPosition.x, toPosition.y];            
-                if (tc.tileType != Globals.ROCK) {
+                if (tc.tileType != Globals.ROCK && (!this.hasItem() || !tc.hasItem() )) {
                     float speed = findSpeedMultipler(tc);
                     StartCoroutine(Move(tc, (int)toPosition.x, (int)toPosition.y, speed));
                 }
@@ -107,9 +112,23 @@ public class PlayerController : MonoBehaviour {
         isMoving = false;
     }
 
-    public void activateItem(int itemType) {
-        // NO-OP
+    public void setItemType(int newItemType) {
+
+        for (int i=0; i<items.Length; i++) {
+            items[i].SetActive(false);
+        }
+    
+        if (newItemType > 0 && newItemType - 1 < items.Length) {
+            items[newItemType-1].SetActive(true);
+        }
+
+        this.itemType = newItemType;
     }
+
+public bool hasItem(){ 
+    return this.itemType > 0;
+}
+
 
     public void die() {
         // TODO
