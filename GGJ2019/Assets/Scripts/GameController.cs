@@ -27,6 +27,8 @@ public class GameController : MonoBehaviour {
 
     public PlayerController pc;
 
+	public GameObject gameOverCanvas;
+
 	public static bool playerDied = false;	
 
 	// Kinda odd that I use a Vector4, but x, y are for position of item, z is for if it has been touched, and w is for item type
@@ -135,6 +137,12 @@ public class GameController : MonoBehaviour {
             loseGame();
         }
 
+		if (Input.GetKeyDown("p")) {
+			loseGame();
+		}
+
+		print(GameController.UserID);
+
     }
 
 	private int calculateScore() {
@@ -180,11 +188,8 @@ public class GameController : MonoBehaviour {
         // Do other stuff
         pc.die();
         // send the new score to PlayFab
-		playfabClient.SubmitScore(score, submittedScore => {
-			if (submittedScore) {
-				this.getScoreLeaderboard();
-			} 			
-		});		
+		gameOverCanvas.SetActive(true);
+		
     }
 
 	private void getScoreLeaderboard() {
@@ -192,5 +197,17 @@ public class GameController : MonoBehaviour {
 			this.scoreBoard = result;
 			// TODO: Use the scoreboard (present it)
 		});
+	}
+
+	public void UpdateName(string name) {
+		GameController.UserID = name;
+	}
+
+	public void submitScorePlayfab() {
+		playfabClient.SubmitScore(score, submittedScore => {
+			if (submittedScore) {
+				this.getScoreLeaderboard();
+			} 			
+		});		
 	}
 }
