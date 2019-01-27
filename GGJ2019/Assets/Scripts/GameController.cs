@@ -27,6 +27,7 @@ public class GameController : MonoBehaviour {
 
     public PlayerController pc;
 
+	public static bool playerDied = false;
 
 	void Awake() {
 		if (GameController.controller == null) {
@@ -104,8 +105,8 @@ public class GameController : MonoBehaviour {
     // Update is called once per frame
     void Update() {
         //Death Check
-        if (pc.position.x <= killzone.killColumn)
-        {
+        if (pc.position.x <= killzone.killColumn && !GameController.playerDied) {
+			playerDied = true;
             loseGame();
         }
     }
