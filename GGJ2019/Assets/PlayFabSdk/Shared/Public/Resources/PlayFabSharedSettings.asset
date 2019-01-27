@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 093286084a3d1994a9c28281a1c38b1d, type: 3}
   m_Name: PlayFabSharedSettings
   m_EditorClassIdentifier: 
-  TitleId: GGJ19BurrowGame
+  TitleId: EFDA
   VerticalName: 
-  DeveloperSecretKey: 
+  DeveloperSecretKey: F5UC4EQR5FP1973ZM6NQD4CFMHM75UIAGKRBJENMRPCQG8NITS
   ProductionEnvironmentUrl: 
   RequestType: 2
   RequestTimeout: 2000
