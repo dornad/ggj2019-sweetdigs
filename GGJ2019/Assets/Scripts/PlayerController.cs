@@ -35,6 +35,8 @@ public class PlayerController : MonoBehaviour {
     // Update is called once per frame
     void Update() {
 
+        testInput();
+
         if (!isMoving) {
             changePosition();
             if (Input.GetKeyDown("e")){
@@ -53,6 +55,15 @@ public class PlayerController : MonoBehaviour {
     //     // NEXT: Vector2.Lerp + time.deltaTime
     //     this.transform.position = new Vector3(position.x, position.y, 0);
     // }
+
+    private void testInput() {        
+        System.Array values = System.Enum.GetValues(typeof(KeyCode));
+        foreach(KeyCode code in values) {
+            if (Input.GetKeyDown(code)) { 
+                print(System.Enum.GetName(typeof(KeyCode), code));
+            }                    
+        }
+    }
 
     public void changePosition() {
 
