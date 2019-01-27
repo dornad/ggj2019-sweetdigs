@@ -123,6 +123,8 @@ public class PlayerController : MonoBehaviour {
         bool hasUpdated = false;
         //start anim
         animator.SetBool("isDigging", isDigging);
+        animator.SetFloat("xInput", endMovePosition.x - startMovePosition.x);
+        animator.SetFloat("yInput", endMovePosition.y - startMovePosition.y);
 
         for (float i =0; i<1; i += speed * Time.deltaTime) {
             position = Vector3.Lerp(startMovePosition, endMovePosition, i);
@@ -136,8 +138,10 @@ public class PlayerController : MonoBehaviour {
         }
         position = endMovePosition;
         isMoving = false;
-        //end anim needed?
+        //end anim
         animator.SetBool("isDigging", false);
+        //animator.SetFloat("xInput", 0);
+        //animator.SetFloat("yInput", 0);
     }
 
     public void setItemType(int newItemType) {
