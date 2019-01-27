@@ -170,6 +170,9 @@ public class PlayerController : MonoBehaviour {
         
         if (dropPos.x >= 0 && dropPos.y >=0 && dropPos.y < GameController.rows && dropPos.x < GameController.columns) {
             
+            
+            GameController.itemLocationsScores.Add(new Vector4(dropPos.x, dropPos.y, 1, this.itemType));
+
             TileController tc = tiles[dropPos.x, dropPos.y];            
             if (tc.tileType == Globals.TUNNEL && !tc.hasItem() ) {
                 tc.putItem(this.itemType);

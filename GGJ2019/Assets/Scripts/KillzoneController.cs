@@ -21,9 +21,11 @@ public class KillzoneController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        this.transform.position = new Vector3(this.transform.position.x + (moveSpeed*Time.deltaTime), this.transform.position.y, this.transform.position.z);
-        killPosition += moveSpeed * Time.deltaTime;
-        killColumn = Mathf.FloorToInt(killPosition);
-        //Debug.Log(killColumn);
+        if (this.transform.position.x < 220) {
+            this.transform.position = new Vector3(this.transform.position.x + (moveSpeed*Time.deltaTime), this.transform.position.y, this.transform.position.z);
+            killPosition += moveSpeed * Time.deltaTime;
+            killColumn = Mathf.FloorToInt(killPosition);
+            //Debug.Log(killColumn);
+        }
     }
 }
