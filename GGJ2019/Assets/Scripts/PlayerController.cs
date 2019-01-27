@@ -17,12 +17,17 @@ public class PlayerController : MonoBehaviour {
     public int itemType = 0; 
 
     public GameObject[] items;
+    
+    public AudioClip[] sounds; 
+
+    public AudioSource source;
 
 
     // Start is called before the first frame update
     void Start() {
         // Store reference to attached controller
         position = startPosition;
+        source = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -31,8 +36,12 @@ public class PlayerController : MonoBehaviour {
         if (!isMoving) {
             changePosition();
             if (Input.GetKeyDown("e")){
-                dropItem();
-            }
+                if (dropItem()){
+                    source.clip = sounds[0];
+                    source.Play();
+                }
+            } 
+            
         }
         this.transform.position = position;
 
@@ -126,6 +135,8 @@ public class PlayerController : MonoBehaviour {
     
         if (newItemType > 0 && newItemType - 1 < items.Length) {
             items[newItemType-1].SetActive(true);
+            source.clip = sounds[1];
+            source.Play();
         }
 
         this.itemType = newItemType;
@@ -135,7 +146,7 @@ public class PlayerController : MonoBehaviour {
         return this.itemType > 0;
     }
 
-    public void dropItem(){
+    public bool dropItem(){
 
         TileController[,] tiles = GameController.tcArray;
 
@@ -144,13 +155,18 @@ public class PlayerController : MonoBehaviour {
         
         if (dropPos.x >= 0 && dropPos.y >=0 && dropPos.y < GameController.rows && dropPos.x < GameController.columns) {
             
-            TileController tc = tiles[dropPos.x, dropPos.y];            
-            if (tc.tileType == Globals.TUNNEL && !tc.hasItem() ) {
+            TileController tc = tiles[dropPos.x, dropPos.y]; 
+            if (tc.tileType == Globals.TUNNEL && !tc.hasItem() && this.hasItem()) {
                 tc.putItem(this.itemType);
                 this.setItemType(0);
+                return true;
+
             }
+            
         }
-        
+
+        return false;
+
     }
 
 
