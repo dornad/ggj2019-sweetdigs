@@ -203,6 +203,7 @@ public class PlayerController : MonoBehaviour {
     public void die() {
         // TODO
         Debug.Log("Player has died");
-
+        this.GetComponent<SpriteRenderer>().enabled = false;
+        this.enabled = false;
     }
 }
