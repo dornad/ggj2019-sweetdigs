@@ -255,6 +255,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 4
+  digSpeedMod: 0.4
+  toughSpeedMod: 0.1
   position: {x: 0, y: 0, z: 0}
   startPosition: {x: 13, y: 8, z: 0}
   itemType: 0
