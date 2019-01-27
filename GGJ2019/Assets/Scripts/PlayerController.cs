@@ -56,7 +56,13 @@ public class PlayerController : MonoBehaviour {
     //     this.transform.position = new Vector3(position.x, position.y, 0);
     // }
 
-    private void testInput() {        
+    private void testInput() {
+
+        var hAxis = Input.GetAxis("Horizontal");
+        var vAxis = Input.GetAxis("Vertical");
+        var ghAxis = Input.GetAxis("GamePad_Horizontal");
+        var gvAxis = Input.GetAxis("GamePad_Vertical");
+
         System.Array values = System.Enum.GetValues(typeof(KeyCode));
         foreach(KeyCode code in values) {
             if (Input.GetKeyDown(code)) { 
@@ -80,16 +86,19 @@ public class PlayerController : MonoBehaviour {
         int toX = 0;
         int toY = 0;
 
-        if (Input.GetKey("w")){ //|| Input.GetAxis("Vertical") == 1) {
+
+        
+
+        if (Input.GetAxis("GamePad_Vertical") == 1) {
             toY = 1;
         }
-        else if (Input.GetKey("a")){ //|| Input.GetAxis("Horizontal") == -1) {
+        else if (Input.GetAxis("GamePad_Horizontal") == -1) {
             toX = -1;
         }
-        else if (Input.GetKey("s")){ //|| Input.GetAxis("Vertical") == -1) {
+        else if (Input.GetAxis("GamePad_Vertical") == -1) {
             toY = -1;
         }
-        else if (Input.GetKey("d")){ //|| Input.GetAxis("Horizontal") == 1) {
+        else if (Input.GetAxis("GamePad_Horizontal") == 1) {
             toX = 1;            
         }
 
