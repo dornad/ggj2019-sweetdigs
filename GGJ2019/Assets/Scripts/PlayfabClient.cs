@@ -22,6 +22,22 @@ public class PlayfabClient : MonoBehaviour
         PlayFabClientAPI.LoginWithCustomID(request, OnLoginSuccess, OnNetworkOperationFailure);
     }
 
+    public void UpdateDisplayName(string displayName, UnityAction<bool> callback = null) {
+        var request = new UpdateUserTitleDisplayNameRequest {
+            DisplayName = displayName
+        };        
+        PlayFabClientAPI.UpdateUserTitleDisplayName(request, response => {
+            if (callback != null) {
+                callback(true);
+            }
+        }, failure => {
+            OnNetworkOperationFailure(failure);
+            if (callback != null) {
+                callback(false);
+            }
+        });
+    }
+
     public void SubmitScore(int scoreValue, UnityAction<bool> callback = null) { 
         var updates = new Dictionary<string, string> {
             { Globals.PLAYFAB_SCORE_KEY, scoreValue.ToString() },            
@@ -34,8 +50,8 @@ public class PlayfabClient : MonoBehaviour
             if (callback != null) {
                 callback(true);
             }
-        }, result => {
-            OnNetworkOperationFailure(result);
+        }, failure => {
+            OnNetworkOperationFailure(failure);
             if (callback != null) {
                 callback(false);
             }

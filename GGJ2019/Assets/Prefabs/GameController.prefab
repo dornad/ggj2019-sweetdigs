@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5111495121501979620}
   - component: {fileID: 5111495121501979621}
+  - component: {fileID: 1336942541}
   m_Layer: 0
   m_Name: GameController
   m_TagString: Untagged
@@ -49,3 +50,15 @@ MonoBehaviour:
   gridSize: {x: 2, y: 4}
   levelFile: GGJ19 Level input csv - Level
   pc: {fileID: 0}
+--- !u!114 &1336942541
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5111495121501979622}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6369f774ebbbc47f6a295af2d15ed704, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
