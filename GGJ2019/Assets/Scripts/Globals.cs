@@ -11,5 +11,4 @@ public class Globals : MonoBehaviour
     public const int ITEM_1 = 1;
     public const int ITEM_2 = 2;
     public const int ITEM_3 = 3;
-    public const string PLAYFAB_SCORE_KEY = "score";
 }
