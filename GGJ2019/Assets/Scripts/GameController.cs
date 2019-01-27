@@ -98,7 +98,11 @@ public class GameController : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        
+        //Death Check
+        if (pc.position.x <= killzone.killColumn)
+        {
+            loseGame();
+        }
     }
 
     public void loseGame() {
