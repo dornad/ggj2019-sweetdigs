@@ -8,7 +8,7 @@ public class GameController : MonoBehaviour {
 
 	public static int score;
 	
-	public static string UserID;
+	public static string UserID = "EnterName";
 
 	public GameObject tile;
     public GameObject killzonePrefab;
@@ -27,11 +27,24 @@ public class GameController : MonoBehaviour {
 
     public PlayerController pc;
 
-	public static bool playerDied = false;
-
+	public static bool playerDied = false;	
 
 	// Kinda odd that I use a Vector4, but x, y are for position of item, z is for if it has been touched, and w is for item type
 	public static List<Vector4> itemLocationsScores;
+
+	private PlayfabClient playfabClient;
+
+	public struct ScoreBoardEntry {
+		public string name; // or unique identifier
+		public int score;
+		public bool isPlayer;
+		public ScoreBoardEntry(string p1, int p2, bool p3 = false) {
+        	name = p1;
+        	score = p2;
+			isPlayer = p3;
+    	}
+	}
+	public List<ScoreBoardEntry> scoreBoard = new List<ScoreBoardEntry>();
 
 	void Awake() {
 		if (GameController.controller == null) {
@@ -43,7 +56,11 @@ public class GameController : MonoBehaviour {
 		}
 
         pc = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+<<<<<<< HEAD
+		playfabClient = this.GetComponent<PlayfabClient>();
+=======
 		GameController.itemLocationsScores = new List<Vector4>();
+>>>>>>> master
 	}
 
     // Start is called before the first frame update
@@ -174,6 +191,18 @@ public class GameController : MonoBehaviour {
     public void loseGame() {
         // Do other stuff
         pc.die();
-        
+        // send the new score to PlayFab
+		playfabClient.SubmitScore(score, submittedScore => {
+			if (submittedScore) {
+				this.getScoreLeaderboard();
+			} 			
+		});		
     }
+
+	private void getScoreLeaderboard() {
+		playfabClient.GetScoreLeaderboard(result => { 
+			this.scoreBoard = result;
+			// TODO: Use the scoreboard (present it)
+		});
+	}
 }
