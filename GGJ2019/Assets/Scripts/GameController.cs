@@ -56,11 +56,8 @@ public class GameController : MonoBehaviour {
 		}
 
         pc = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
-<<<<<<< HEAD
 		playfabClient = this.GetComponent<PlayfabClient>();
-=======
 		GameController.itemLocationsScores = new List<Vector4>();
->>>>>>> master
 	}
 
     // Start is called before the first frame update
