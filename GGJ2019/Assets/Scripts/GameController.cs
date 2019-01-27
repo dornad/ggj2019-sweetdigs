@@ -186,18 +186,8 @@ public class GameController : MonoBehaviour {
     public void loseGame() {
         // Do other stuff
         pc.die();
-        // send the new score to PlayFab
-		gameOverCanvas.SetActive(true);
+        gameOverCanvas.SetActive(true);
 		
-		// send the username
-		playfabClient.UpdateDisplayName(GameController.UserID, result => {
-			// send the new score to PlayFab
-			playfabClient.SubmitScore(score, submittedScore => {
-				if (submittedScore) {
-					this.getScoreLeaderboard();
-				} 			
-			});		
-		});				
     }
 
 	private void getScoreLeaderboard() {
@@ -212,10 +202,14 @@ public class GameController : MonoBehaviour {
 	}
 
 	public void submitScorePlayfab() {
-		playfabClient.SubmitScore(score, submittedScore => {
-			if (submittedScore) {
-				this.getScoreLeaderboard();
-			} 			
-		});		
+		// send the username
+		playfabClient.UpdateDisplayName(GameController.UserID, result => {
+			// send the new score to PlayFab
+			playfabClient.SubmitScore(score, submittedScore => {
+				if (submittedScore) {
+					this.getScoreLeaderboard();
+				} 			
+			});		
+		});				
 	}
 }
