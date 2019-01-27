@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class KillzoneController : MonoBehaviour
 {
-    public float moveSpeed = 0.25f;
+    public float moveSpeed = 0.35f;
 
     public int killColumnStart = -1;
 
