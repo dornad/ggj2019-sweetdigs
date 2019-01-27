@@ -29,13 +29,16 @@ public class GameController : MonoBehaviour {
 	private PlayfabClient playfabClient;
 
 	public struct ScoreBoardEntry {
-		public string name;
+		public string name; // or unique identifier
 		public int score;
 		public bool isPlayer;
+		public ScoreBoardEntry(string p1, int p2, bool p3 = false) {
+        	name = p1;
+        	score = p2;
+			isPlayer = p3;
+    	}
 	}
 	public List<ScoreBoardEntry> scoreBoard = new List<ScoreBoardEntry>();
-
-	private bool isDead = false;
 
 	void Awake() {
 		if (GameController.controller == null) {
@@ -114,14 +117,13 @@ public class GameController : MonoBehaviour {
     // Update is called once per frame
     void Update() {
         //Death Check
-        if (pc.position.x <= killzone.killColumn && !isDead)
+        if (pc.position.x <= killzone.killColumn)
         {
             loseGame();
         }
     }
 
     public void loseGame() {
-		isDead = true;
         // Do other stuff
         pc.die();
         // send the new score to PlayFab
@@ -135,6 +137,7 @@ public class GameController : MonoBehaviour {
 	private void getScoreLeaderboard() {
 		playfabClient.GetScoreLeaderboard(result => { 
 			this.scoreBoard = result;
+			// TODO: Use the scoreboard (present it)
 		});
 	}
 }

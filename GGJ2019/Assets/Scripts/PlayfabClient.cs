@@ -24,7 +24,7 @@ public class PlayfabClient : MonoBehaviour
 
     public void SubmitScore(int scoreValue, UnityAction<bool> callback = null) { 
         var updates = new Dictionary<string, string> {
-            {Globals.PLAYFAB_SCORE_KEY, scoreValue.ToString()}
+            { Globals.PLAYFAB_SCORE_KEY, scoreValue.ToString() },            
         };
         var request = new UpdateUserDataRequest{ 
             Data = updates,
@@ -43,7 +43,27 @@ public class PlayfabClient : MonoBehaviour
     }
     
     public void GetScoreLeaderboard(UnityAction<ScoreBoardList> callback) {
-        // TODO
+        var list = new ScoreBoardList();
+        var request = new GetLeaderboardRequest
+        {
+            MaxResultsCount = 10,
+            StatisticName = Globals.PLAYFAB_SCORE_KEY
+        };
+        PlayFabClientAPI.GetLeaderboard(request, result => {
+            if (callback != null) {
+                foreach (var item in result.Leaderboard) {
+                    list.Add(new GameController.ScoreBoardEntry(
+                        item.DisplayName, item.StatValue
+                    ));
+                }
+                callback(list);
+            }            
+        }, error => {
+            OnNetworkOperationFailure(error);
+            if (callback != null) {                
+                callback(list);
+            }
+        });
     }
 
     /// Success Responses
