@@ -6,6 +6,8 @@ using UnityEngine;
 using UnityEngine.Events;
 using ScoreBoardList = System.Collections.Generic.List<GameController.ScoreBoardEntry>;
 
+using System;
+
 public class PlayfabClient : MonoBehaviour
 {
     private bool isLoggedIn = false;
@@ -18,7 +20,9 @@ public class PlayfabClient : MonoBehaviour
     /// Requests
 
     private void Login() {
-        var request = new LoginWithCustomIDRequest { CustomId = GameController.UserID, CreateAccount = true};
+        string id = System.Guid.NewGuid().ToString();
+        print(id);
+        var request = new LoginWithCustomIDRequest { CustomId = id, CreateAccount = true};
         PlayFabClientAPI.LoginWithCustomID(request, OnLoginSuccess, OnNetworkOperationFailure);
     }
 
