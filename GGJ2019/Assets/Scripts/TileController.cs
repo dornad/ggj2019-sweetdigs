@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class TileController : MonoBehaviour {
 
+	public const int NUM_TYPES = 3;
+
 	public static TileController tileController;
     
 	public int type=0;
@@ -22,6 +24,8 @@ public class TileController : MonoBehaviour {
 
 	public GameObject[] items;
 
+	public int itemType;
+
 
 	private SpriteRenderer sr;
 
@@ -29,7 +33,15 @@ public class TileController : MonoBehaviour {
     void Start() {
 			sr = GetComponent<SpriteRenderer>();
 			this.tileType = type % 10;
+			if (this.tileType > NUM_TYPES){
+				this.tileType = NUM_TYPES;
+			}
 			applyTileType();
+			
+			this.itemType = (int)(type/10);
+			if ( this.itemType > items.Length){
+				this.itemType = items.Length; 
+			}
 			applyItemType();
     }
 
@@ -66,24 +78,20 @@ public class TileController : MonoBehaviour {
 			sr.color = Color.magenta;
 		}
 		else {
-			sr.color = Color.magenta;
+			sr.color = Color.black;
 		}	
 	}
 
 	private void applyItemType() {
-		int itemType = (int)(type/10);
+		
 		for (int i=0; i<items.Length; i++) {
 			items[i].SetActive(false);
 		}
 
-		try {
-			if (itemType > 0) {
+		
+			if (itemType > 0 && itemType - 1 < items.Length) {
 				items[itemType-1].SetActive(true);
 			}
-		}
-		catch {
-			
-		}
 	}
 
 	public void updateTile(PlayerController pc) {
@@ -92,6 +100,15 @@ public class TileController : MonoBehaviour {
 			this.tileType = Globals.TUNNEL;
 			applyTileType();
 		} 
+		if (this.itemType > 0){
+			pc.setItemType(this.itemType);
+			this.itemType = 0;
+			applyItemType();
+			
+		}
+	}
+	public bool hasItem(){
+		return this.itemType > 0;
 	}
 
 	public void dropItem(int itemNumber) {
