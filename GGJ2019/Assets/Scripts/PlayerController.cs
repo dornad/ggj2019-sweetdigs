@@ -20,6 +20,12 @@ public class PlayerController : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
+        //Death Check
+        if(position.x <= GameController.killzone.killColumn)
+        {
+            die();
+        }
+
         if (!isMoving) {
             changePosition();
         }
@@ -113,6 +119,7 @@ public class PlayerController : MonoBehaviour {
 
     public void die() {
         // TODO
+        Debug.Log("Player has died");
 
     }
 }

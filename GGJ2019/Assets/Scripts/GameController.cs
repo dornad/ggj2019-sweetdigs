@@ -12,7 +12,9 @@ public class GameController : MonoBehaviour {
 
 	public string levelFile;
 
-	public static TileController[,] tcArray;
+    public static KillzoneController killzone;
+
+    public static TileController[,] tcArray;
 
 	public static int rows;
 	public static int columns;
@@ -51,7 +53,7 @@ public class GameController : MonoBehaviour {
 					cont.loc.y = j;
 				}
 			}
-		}
+        }
 		else {
 			// required...
 			string boardString = level.text.Trim();
@@ -87,7 +89,10 @@ public class GameController : MonoBehaviour {
 					// cont.b = Random.Range((float)0, float.Parse(element));
 				}
 			}
-		}
+            //Bring in the... Kill Zoooone!
+            killzone = Instantiate(killzonePrefab).GetComponent<KillzoneController>();
+            killzone.transform.position = new Vector3(0, 7.5f, killzone.transform.position.z);
+        }
     }
 
     // Update is called once per frame
