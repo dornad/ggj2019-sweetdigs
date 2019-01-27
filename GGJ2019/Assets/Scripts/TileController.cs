@@ -20,15 +20,17 @@ public class TileController : MonoBehaviour {
 	public float g = 0;
 	public float b = 0;
 
+	public GameObject[] items;
+
 
 	private SpriteRenderer sr;
 
 	// Start is called before the first frame update
     void Start() {
-		sr = GetComponent<SpriteRenderer>();
-		parseType();
-		// sr.color = Color.blue;
-
+			sr = GetComponent<SpriteRenderer>();
+			this.tileType = type % 10;
+			applyTileType();
+			applyItemType();
     }
 
     // Update is called once per frame
@@ -46,11 +48,6 @@ public class TileController : MonoBehaviour {
 		}
 		*/
     }
-
-	private void parseType() {
-		tileType = type % 10;
-		applyTileType();
-	}
 
 	private void applyTileType() {
 		if (tileType == Globals.DIRT) {
@@ -70,6 +67,22 @@ public class TileController : MonoBehaviour {
 		}
 		else {
 			sr.color = Color.magenta;
+		}	
+	}
+
+	private void applyItemType() {
+		int itemType = (int)(type/10);
+		for (int i=0; i<items.Length; i++) {
+			items[i].SetActive(false);
+		}
+
+		try {
+			if (itemType > 0) {
+				items[itemType-1].SetActive(true);
+			}
+		}
+		catch {
+			
 		}
 	}
 
@@ -79,5 +92,9 @@ public class TileController : MonoBehaviour {
 			this.tileType = Globals.TUNNEL;
 			applyTileType();
 		} 
+	}
+
+	public void dropItem(int itemNumber) {
+
 	}
 }
