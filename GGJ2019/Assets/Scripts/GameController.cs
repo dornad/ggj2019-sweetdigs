@@ -7,8 +7,9 @@ public class GameController : MonoBehaviour {
 	public static GameController controller;
 
 	public GameObject tile;
+    public GameObject killzonePrefab;
 
-	public Vector2 gridSize;
+    public Vector2 gridSize;
 
 	public string levelFile;
 
