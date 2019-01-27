@@ -65,12 +65,11 @@ public class PlayfabClient : MonoBehaviour
     
     public void GetScoreLeaderboard(UnityAction<ScoreBoardList> callback) {
         var list = new ScoreBoardList();
-        var request = new GetLeaderboardRequest
+        var request = new GetLeaderboardAroundPlayerRequest
         {
-            MaxResultsCount = 10,
             StatisticName = Globals.PLAYFAB_SCORE_KEY
         };
-        PlayFabClientAPI.GetLeaderboard(request, result => {
+        PlayFabClientAPI.GetLeaderboardAroundPlayer(request, result => {
             if (callback != null) {
                 foreach (var item in result.Leaderboard) {
                     list.Add(new GameController.ScoreBoardEntry(

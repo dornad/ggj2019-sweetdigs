@@ -152,7 +152,9 @@ public class GameController : MonoBehaviour {
 			SceneManager.LoadScene(0);
 		}
 
-		GameController.UserID = nameInput.text;
+		if (nameInput != null) {
+			GameController.UserID = nameInput.text;	
+		}		
     }
 
 	private int calculateScore() {
