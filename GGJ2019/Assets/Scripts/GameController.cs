@@ -8,7 +8,7 @@ public class GameController : MonoBehaviour {
 
 	public static int score;
 	
-	public static string UserID;
+	public static string UserID = "EnterName";
 
 	public GameObject tile;
     public GameObject killzonePrefab;
@@ -27,11 +27,24 @@ public class GameController : MonoBehaviour {
 
     public PlayerController pc;
 
-	public static bool playerDied = false;
-
+	public static bool playerDied = false;	
 
 	// Kinda odd that I use a Vector4, but x, y are for position of item, z is for if it has been touched, and w is for item type
 	public static List<Vector4> itemLocationsScores;
+
+	private PlayfabClient playfabClient;
+
+	public struct ScoreBoardEntry {
+		public string name; // or unique identifier
+		public int score;
+		public bool isPlayer;
+		public ScoreBoardEntry(string p1, int p2, bool p3 = false) {
+        	name = p1;
+        	score = p2;
+			isPlayer = p3;
+    	}
+	}
+	public List<ScoreBoardEntry> scoreBoard = new List<ScoreBoardEntry>();
 
 	void Awake() {
 		if (GameController.controller == null) {
@@ -43,6 +56,7 @@ public class GameController : MonoBehaviour {
 		}
 
         pc = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+		playfabClient = this.GetComponent<PlayfabClient>();
 		GameController.itemLocationsScores = new List<Vector4>();
 	}
 
@@ -79,8 +93,7 @@ public class GameController : MonoBehaviour {
 			
 			GameController.rows = numRows;
 			GameController.columns = numColumns;
-			// print(numRows);
-			// print(numColumns);
+
 			// START
 			tcArray = new TileController[numColumns, numRows];
 			for (int i = numRows-1; i >= 0; i--) {
@@ -122,7 +135,6 @@ public class GameController : MonoBehaviour {
             loseGame();
         }
 
-		print(GameController.score);
     }
 
 	private int calculateScore() {
@@ -133,13 +145,6 @@ public class GameController : MonoBehaviour {
 			if (GameController.killzone.killColumn < item.x) {
 				// Only calculate if it's been touched
 				Vector2 playerPos = new Vector2(this.pc.transform.position.x, this.pc.transform.position.y);
-
-
-				// if (Vector2.Distance(playerPos, new Vector2(item.x, item.y)) < 1) {
-				// 	itemLocationsScores[i] = new Vector4(item.x, item.y, 1, item.w);
-				// 	item.z = 1;
-				// }
-				
 				
 				if (item.z > 0) {
 					if (item.w == 1) {
@@ -174,6 +179,18 @@ public class GameController : MonoBehaviour {
     public void loseGame() {
         // Do other stuff
         pc.die();
-        
+        // send the new score to PlayFab
+		playfabClient.SubmitScore(score, submittedScore => {
+			if (submittedScore) {
+				this.getScoreLeaderboard();
+			} 			
+		});		
     }
+
+	private void getScoreLeaderboard() {
+		playfabClient.GetScoreLeaderboard(result => { 
+			this.scoreBoard = result;
+			// TODO: Use the scoreboard (present it)
+		});
+	}
 }
