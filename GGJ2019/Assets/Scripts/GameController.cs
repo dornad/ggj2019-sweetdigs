@@ -70,6 +70,8 @@ public class GameController : MonoBehaviour {
 
     // Start is called before the first frame update
     void Start() {
+        GameController.score = 0;
+        GameController.playerDied = false;
 		TextAsset level = (TextAsset)Resources.Load(levelFile);
 		if (level == null) {
 			/*
