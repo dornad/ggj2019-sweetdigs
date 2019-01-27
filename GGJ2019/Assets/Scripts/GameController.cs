@@ -93,8 +93,7 @@ public class GameController : MonoBehaviour {
 			
 			GameController.rows = numRows;
 			GameController.columns = numColumns;
-			// print(numRows);
-			// print(numColumns);
+
 			// START
 			tcArray = new TileController[numColumns, numRows];
 			for (int i = numRows-1; i >= 0; i--) {
@@ -136,7 +135,6 @@ public class GameController : MonoBehaviour {
             loseGame();
         }
 
-		print(GameController.score);
     }
 
 	private int calculateScore() {
@@ -147,13 +145,6 @@ public class GameController : MonoBehaviour {
 			if (GameController.killzone.killColumn < item.x) {
 				// Only calculate if it's been touched
 				Vector2 playerPos = new Vector2(this.pc.transform.position.x, this.pc.transform.position.y);
-
-
-				// if (Vector2.Distance(playerPos, new Vector2(item.x, item.y)) < 1) {
-				// 	itemLocationsScores[i] = new Vector4(item.x, item.y, 1, item.w);
-				// 	item.z = 1;
-				// }
-				
 				
 				if (item.z > 0) {
 					if (item.w == 1) {
