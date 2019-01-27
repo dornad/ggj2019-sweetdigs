@@ -6,6 +6,10 @@ public class GameController : MonoBehaviour {
 
 	public static GameController controller;
 
+	public static int score;
+	
+	public static string UserID;
+
 	public GameObject tile;
     public GameObject killzonePrefab;
 
@@ -16,6 +20,7 @@ public class GameController : MonoBehaviour {
     public static KillzoneController killzone;
 
     public static TileController[,] tcArray;
+	
 
 	public static int rows;
 	public static int columns;
