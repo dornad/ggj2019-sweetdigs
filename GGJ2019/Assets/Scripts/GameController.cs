@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+using UnityEngine.UI;
+
 public class GameController : MonoBehaviour {
 
 	public static GameController controller;
@@ -27,6 +29,9 @@ public class GameController : MonoBehaviour {
     public PlayerController pc;
 
 	public GameObject gameOverCanvas;
+	public GameObject LeaderBoard;
+	public GameObject ScoreInput;
+	public InputField nameInput;
 
 	public static bool playerDied = false;	
 
@@ -137,9 +142,11 @@ public class GameController : MonoBehaviour {
         }
 
 		if (Input.GetKeyDown("p")) {
+			playerDied = true;
 			loseGame();
 		}
 
+		GameController.UserID = nameInput.text;
 		print(GameController.UserID);
 
     }
@@ -208,7 +215,9 @@ public class GameController : MonoBehaviour {
 			playfabClient.SubmitScore(score, submittedScore => {
 				if (submittedScore) {
 					this.getScoreLeaderboard();
-				} 			
+				} 
+				ScoreInput.SetActive(false);
+				LeaderBoard.SetActive(true);
 			});		
 		});				
 	}
