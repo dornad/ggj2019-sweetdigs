@@ -43,14 +43,15 @@ public class PlayfabClient : MonoBehaviour
     }
 
     public void SubmitScore(int scoreValue, UnityAction<bool> callback = null) { 
-        var updates = new Dictionary<string, string> {
-            { Globals.PLAYFAB_SCORE_KEY, scoreValue.ToString() },            
+        var update = new StatisticUpdate {
+            StatisticName = Globals.PLAYFAB_SCORE_KEY,
+            Value = scoreValue
         };
-        var request = new UpdateUserDataRequest{ 
-            Data = updates,
-            Permission = UserDataPermission.Public
-        };        
-        PlayFabClientAPI.UpdateUserData(request, result => {            
+        var list = new List<StatisticUpdate>();
+        list.Add(update);
+        var req = new UpdatePlayerStatisticsRequest();
+        req.Statistics = list;        
+        PlayFabClientAPI.UpdatePlayerStatistics(req, result => {            
             if (callback != null) {
                 callback(true);
             }
