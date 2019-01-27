@@ -56,16 +56,16 @@ public class PlayerController : MonoBehaviour {
         int toX = 0;
         int toY = 0;
 
-        if (Input.GetKeyDown("w")){ // || Input.GetKeyDown(KeyCode.Joystick1Button0)){ //|| Input.GetAxis("Vertical") == -1) {
+        if (Input.GetKey("w")){ // || Input.GetKeyDown(KeyCode.Joystick1Button0)){ //|| Input.GetAxis("Vertical") == -1) {
             toY = 1;
         }
-        else if (Input.GetKeyDown("a")){ //|| Input.GetAxis("Horizontal") == -1) {
+        else if (Input.GetKey("a")){ //|| Input.GetAxis("Horizontal") == -1) {
             toX = -1;
         }
-        else if (Input.GetKeyDown("s")){ //|| Input.GetAxis("Vertical") == 1) {
+        else if (Input.GetKey("s")){ //|| Input.GetAxis("Vertical") == 1) {
             toY = -1;
         }
-        else if (Input.GetKeyDown("d")){ //|| Input.GetAxis("Horizontal") == 1) {
+        else if (Input.GetKey("d")){ //|| Input.GetAxis("Horizontal") == 1) {
             toX = 1;            
         }
 
