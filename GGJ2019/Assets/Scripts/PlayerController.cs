@@ -9,7 +9,6 @@ public class PlayerController : MonoBehaviour {
     public float toughSpeedMod = 0.5f;
 
     public Vector3 position;
-
     public Vector3 startPosition;
 
     private bool isMoving = false;
@@ -18,11 +17,14 @@ public class PlayerController : MonoBehaviour {
 
     public GameObject[] items;
 
+    private Animator animator;
+
 
     // Start is called before the first frame update
     void Start() {
         // Store reference to attached controller
         position = startPosition;
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -79,7 +81,8 @@ public class PlayerController : MonoBehaviour {
                 TileController tc = tiles[toPosition.x, toPosition.y];            
                 if (tc.tileType != Globals.ROCK && (!this.hasItem() || !tc.hasItem() )) {
                     float speed = findSpeedMultipler(tc);
-                    StartCoroutine(Move(tc, (int)toPosition.x, (int)toPosition.y, speed));
+                    bool isDigging = findIfDigging(tc);
+                    StartCoroutine(Move(tc, (int)toPosition.x, (int)toPosition.y, speed, isDigging));
                 }
             }
         }        
@@ -98,11 +101,28 @@ public class PlayerController : MonoBehaviour {
         }        
     }
 
-    public IEnumerator Move(TileController tC, float x, float y, float speed) {
+    private bool findIfDigging(TileController tc)
+    {
+        switch (tc.tileType)
+        {
+            case Globals.DIRT:
+                return true;
+            case Globals.TUNNEL:
+                return false;
+            case Globals.TOUGH_DIRT:
+                return true;
+            default:
+                return false;
+        }
+    }
+
+    public IEnumerator Move(TileController tC, float x, float y, float speed, bool isDigging) {
         isMoving = true;
         Vector3 startMovePosition = new Vector3(position.x, position.y, 0);
         Vector3 endMovePosition = new Vector3(x, y, 0);        
         bool hasUpdated = false;
+        //start anim
+        animator.SetBool("isDigging", isDigging);
 
         for (float i =0; i<1; i += speed * Time.deltaTime) {
             position = Vector3.Lerp(startMovePosition, endMovePosition, i);
@@ -116,6 +136,8 @@ public class PlayerController : MonoBehaviour {
         }
         position = endMovePosition;
         isMoving = false;
+        //end anim needed?
+        animator.SetBool("isDigging", false);
     }
 
     public void setItemType(int newItemType) {
