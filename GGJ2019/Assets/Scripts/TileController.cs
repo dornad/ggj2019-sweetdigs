@@ -63,21 +63,26 @@ public class TileController : MonoBehaviour {
 
 	private void applyTileType() {
 		if (tileType == Globals.DIRT) {
-			sr.color = Color.grey;
+			sr.color = Color.clear;
 		}
 		else if (tileType == Globals.TUNNEL) {
-			sr.color = Color.yellow;
+			sr.sprite = sprites[1];
+			sr.color = Color.white;
 		}
 		else if (tileType == Globals.ROCK) {
-			sr.color = Color.cyan;
+			sr.sprite = sprites[2];
+			sr.color = Color.white;
 		}
 		else if (tileType == Globals.TOUGH_DIRT) {
+			sr.sprite = sprites[0];
 			sr.color = Color.red;
 		}
 		else if (tileType == 4) {
+			sr.sprite = sprites[0];
 			sr.color = Color.magenta;
 		}
 		else {
+			sr.sprite = sprites[0];
 			sr.color = Color.black;
 		}	
 	}
