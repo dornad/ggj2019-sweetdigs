@@ -203,6 +203,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0daeaf0d94df8604fa32e8c806977e67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 0.25
+  moveSpeed: 0.35
   killColumnStart: 0
   killColumn: 0

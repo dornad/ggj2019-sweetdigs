@@ -5,6 +5,8 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour {
 
     public float moveSpeed = 3;
+    public float digSpeedMod = 0.5f;
+    public float toughSpeedMod = 0.5f;
 
     public Vector3 position;
 
@@ -86,11 +88,11 @@ public class PlayerController : MonoBehaviour {
     private float findSpeedMultipler(TileController tc) {
         switch (tc.tileType) {
             case Globals.DIRT:
-                return this.moveSpeed * 0.5f;
+                return this.moveSpeed * digSpeedMod;
             case Globals.TUNNEL:
                 return this.moveSpeed;
             case Globals.TOUGH_DIRT:
-                return this.moveSpeed * 0.25f;             
+                return this.moveSpeed * toughSpeedMod;             
             default:
                 return this.moveSpeed;
         }        

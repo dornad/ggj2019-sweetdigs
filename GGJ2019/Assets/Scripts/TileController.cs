@@ -64,26 +64,32 @@ public class TileController : MonoBehaviour {
 	private void applyTileType() {
 		if (tileType == Globals.DIRT) {
 			sr.color = Color.clear;
+			sr.sortingOrder = 0;
 		}
 		else if (tileType == Globals.TUNNEL) {
 			sr.sprite = sprites[1];
 			sr.color = Color.white;
+			sr.sortingOrder = 1;
 		}
 		else if (tileType == Globals.ROCK) {
 			sr.sprite = sprites[2];
 			sr.color = Color.white;
+			sr.sortingOrder = 2;
 		}
 		else if (tileType == Globals.TOUGH_DIRT) {
 			sr.sprite = sprites[0];
 			sr.color = Color.red;
+			sr.sortingOrder = 2;
 		}
 		else if (tileType == 4) {
 			sr.sprite = sprites[0];
 			sr.color = Color.magenta;
+			sr.sortingOrder = 2;
 		}
 		else {
 			sr.sprite = sprites[0];
 			sr.color = Color.black;
+			sr.sortingOrder = 0;
 		}	
 	}
 
