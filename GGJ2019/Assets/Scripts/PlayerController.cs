@@ -28,11 +28,8 @@ public class PlayerController : MonoBehaviour {
     void Start() {
         // Store reference to attached controller
         position = startPosition;
-<<<<<<< HEAD
         source = GetComponent<AudioSource>();
-=======
         animator = GetComponent<Animator>();
->>>>>>> 2288672d9aa846bc6c5f9fb2492ec584f6b4a1b5
     }
 
     // Update is called once per frame
