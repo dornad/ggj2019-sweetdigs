@@ -67,7 +67,6 @@ public class PlayfabClient : MonoBehaviour
         var list = new ScoreBoardList();
         var request = new GetLeaderboardAroundPlayerRequest
         {
-            MaxResultsCount = 10,
             StatisticName = Globals.PLAYFAB_SCORE_KEY
         };
         PlayFabClientAPI.GetLeaderboardAroundPlayer(request, result => {
