@@ -25,8 +25,12 @@ public class PlayerController : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
+
         if (!isMoving) {
             changePosition();
+            if (Input.GetKeyDown("e")){
+                dropItem();
+            }
         }
         this.transform.position = position;
 
@@ -52,16 +56,16 @@ public class PlayerController : MonoBehaviour {
         int toX = 0;
         int toY = 0;
 
-        if (Input.GetKeyDown("w") || Input.GetAxis("Vertical") == 1) {
+        if (Input.GetKey("w")){ //|| Input.GetAxis("Vertical") == 1) {
             toY = 1;
         }
-        else if (Input.GetKeyDown("a") || Input.GetAxis("Horizontal") == -1) {
+        else if (Input.GetKey("a")){ //|| Input.GetAxis("Horizontal") == -1) {
             toX = -1;
         }
-        else if (Input.GetKeyDown("s") || Input.GetAxis("Vertical") == -1) {
+        else if (Input.GetKey("s")){ //|| Input.GetAxis("Vertical") == -1) {
             toY = -1;
         }
-        else if (Input.GetKeyDown("d") || Input.GetAxis("Horizontal") == 1) {
+        else if (Input.GetKey("d")){ //|| Input.GetAxis("Horizontal") == 1) {
             toX = 1;            
         }
 
@@ -125,13 +129,32 @@ public class PlayerController : MonoBehaviour {
         this.itemType = newItemType;
     }
 
-public bool hasItem(){ 
-    return this.itemType > 0;
-}
+    public bool hasItem(){ 
+        return this.itemType > 0;
+    }
+
+    public void dropItem(){
+
+        TileController[,] tiles = GameController.tcArray;
+
+
+        Vector2Int dropPos = new Vector2Int((int)position.x, (int) position.y - 1);
+        
+        if (dropPos.x >= 0 && dropPos.y >=0 && dropPos.y < GameController.rows && dropPos.x < GameController.columns) {
+            
+            TileController tc = tiles[dropPos.x, dropPos.y];            
+            if (tc.tileType == Globals.TUNNEL && !tc.hasItem() ) {
+                tc.putItem(this.itemType);
+                this.setItemType(0);
+            }
+        }
+        
+    }
 
 
     public void die() {
         // TODO
+        Debug.Log("Player has died");
 
     }
 }

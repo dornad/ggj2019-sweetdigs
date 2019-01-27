@@ -111,7 +111,9 @@ public class TileController : MonoBehaviour {
 		return this.itemType > 0;
 	}
 
-	public void dropItem(int itemNumber) {
+	public void putItem(int newItemType) {
+		this.itemType = newItemType;
+		applyItemType();
 
 	}
 }
