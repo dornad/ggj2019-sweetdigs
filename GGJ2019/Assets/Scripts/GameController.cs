@@ -8,7 +8,7 @@ public class GameController : MonoBehaviour {
 
 	public static int score;
 	
-	public static string UserID;
+	public static string UserID = "EnterName";
 
 	public GameObject tile;
     public GameObject killzonePrefab;
@@ -26,7 +26,16 @@ public class GameController : MonoBehaviour {
 	public static int columns;
 
     public PlayerController pc;
+	private PlayfabClient playfabClient;
 
+	public struct ScoreBoardEntry {
+		public string name;
+		public int score;
+		public bool isPlayer;
+	}
+	public List<ScoreBoardEntry> scoreBoard = new List<ScoreBoardEntry>();
+
+	private bool isDead = false;
 
 	void Awake() {
 		if (GameController.controller == null) {
@@ -38,6 +47,7 @@ public class GameController : MonoBehaviour {
 		}
 
         pc = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+		playfabClient = this.GetComponent<PlayfabClient>();
 	}
 
     // Start is called before the first frame update
@@ -104,15 +114,27 @@ public class GameController : MonoBehaviour {
     // Update is called once per frame
     void Update() {
         //Death Check
-        if (pc.position.x <= killzone.killColumn)
+        if (pc.position.x <= killzone.killColumn && !isDead)
         {
             loseGame();
         }
     }
 
     public void loseGame() {
+		isDead = true;
         // Do other stuff
         pc.die();
-        
+        // send the new score to PlayFab
+		playfabClient.SubmitScore(score, submittedScore => {
+			if (submittedScore) {
+				this.getScoreLeaderboard();
+			} 			
+		});		
     }
+
+	private void getScoreLeaderboard() {
+		playfabClient.GetScoreLeaderboard(result => { 
+			this.scoreBoard = result;
+		});
+	}
 }
