@@ -21,7 +21,7 @@ public class KillzoneController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (this.transform.position.x < 220) {
+        if (this.transform.position.x < 220 && !GameController.playerDied) {
             this.transform.position = new Vector3(this.transform.position.x + (moveSpeed*Time.deltaTime), this.transform.position.y, this.transform.position.z);
             killPosition += moveSpeed * Time.deltaTime;
             killColumn = Mathf.FloorToInt(killPosition);

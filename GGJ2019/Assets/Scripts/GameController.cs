@@ -1,6 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
+using UnityEngine.UI;
 
 public class GameController : MonoBehaviour {
 
@@ -25,6 +28,12 @@ public class GameController : MonoBehaviour {
 	public static int columns;
 
     public PlayerController pc;
+
+	public GameObject gameOverCanvas;
+	public GameObject LeaderBoard;
+	public GameObject ScoreInput;
+	public GameObject LoadingCanvas;
+	public InputField nameInput;
 
 	public static bool playerDied = false;	
 
@@ -134,6 +143,16 @@ public class GameController : MonoBehaviour {
             loseGame();
         }
 
+		if (Input.GetKeyDown("p")) {
+			playerDied = true;
+			loseGame();
+		}
+
+		if (Input.GetKeyDown(KeyCode.Escape)) {
+			SceneManager.LoadScene(0);
+		}
+
+		GameController.UserID = nameInput.text;
     }
 
 	private int calculateScore() {
@@ -178,21 +197,35 @@ public class GameController : MonoBehaviour {
     public void loseGame() {
         // Do other stuff
         pc.die();
-		// send the username
-		playfabClient.UpdateDisplayName(GameController.UserID, result => {
-			// send the new score to PlayFab
-			playfabClient.SubmitScore(score, submittedScore => {
-				if (submittedScore) {
-					this.getScoreLeaderboard();
-				} 			
-			});		
-		});				
+        gameOverCanvas.SetActive(true);
+		
     }
 
 	private void getScoreLeaderboard() {
 		playfabClient.GetScoreLeaderboard(result => { 
 			this.scoreBoard = result;
 			// TODO: Use the scoreboard (present it)
+			LoadingCanvas.SetActive(false);
+			LeaderBoard.SetActive(true);
 		});
+	}
+
+	public void submitScorePlayfab() {
+		// send the username
+		if (GameController.UserID.Length > 3) {
+			ScoreInput.SetActive(false);
+			LoadingCanvas.SetActive(true);
+			playfabClient.UpdateDisplayName(GameController.UserID, result => {
+				// send the new score to PlayFab
+				playfabClient.SubmitScore(score, submittedScore => {
+					if (submittedScore) {
+						this.getScoreLeaderboard();
+					}
+					else {
+						print("Error submitting Score");
+					} 
+				});		
+			});				
+		}
 	}
 }

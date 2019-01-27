@@ -123,7 +123,7 @@ GameObject:
   - component: {fileID: 7474833219132401204}
   - component: {fileID: 6426602238349002753}
   m_Layer: 0
-  m_Name: Item2
+  m_Name: Hat2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -137,8 +137,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4260400016206723426}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.044999957, y: 0.037, z: 0}
-  m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
+  m_LocalPosition: {x: 0, y: 0.175, z: 0}
+  m_LocalScale: {x: 0.12771568, y: 0.12771568, z: 0.12771568}
   m_Children: []
   m_Father: {fileID: 1367691911313404153}
   m_RootOrder: 1
@@ -179,9 +179,9 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 90
-  m_Sprite: {fileID: 21300000, guid: fafd3d61818201842881235ba58a535d, type: 3}
-  m_Color: {r: 0, g: 0.2333653, b: 1, a: 1}
+  m_SortingOrder: 101
+  m_Sprite: {fileID: 21300000, guid: c471b6054ff06b640854894a2c81dd9f, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -299,7 +299,7 @@ MonoBehaviour:
   sounds:
   - {fileID: 8300000, guid: 8da796d6818514cabb5c2fe2f837bd88, type: 3}
   - {fileID: 8300000, guid: 734fcbdf42f8e467693b4b810e3ef9f2, type: 3}
-  - {fileID: 0}
+  - {fileID: 8300000, guid: 349d444fc81b44fb78eceef2fae3bad5, type: 3}
   source: {fileID: 0}
 --- !u!95 &1659445989
 Animator:
@@ -427,7 +427,7 @@ GameObject:
   - component: {fileID: 7747938330020475662}
   - component: {fileID: 3218271280149585155}
   m_Layer: 0
-  m_Name: Item1
+  m_Name: Hat1_Bucket_lvl1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
