@@ -285,10 +285,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 0
   sprites:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 21300000, guid: fafd3d61818201842881235ba58a535d, type: 3}
+  - {fileID: 21300000, guid: 96d0d68e86222704e80442ac9679dd14, type: 3}
+  - {fileID: 21300000, guid: 33a574f04442c6f40a77d15c2c1830cd, type: 3}
+  - {fileID: 21300000, guid: 30eceb81be54d5c46a7dbf5c19ee42b0, type: 3}
   visible: 1
   loc: {x: -1.5, y: -1.5}
   tileType: 0
@@ -299,6 +299,7 @@ MonoBehaviour:
   - {fileID: 7596806500686708079}
   - {fileID: 4843926165583397713}
   - {fileID: 6292353022666809958}
+  itemType: 0
 --- !u!1 &7596806500686708079
 GameObject:
   m_ObjectHideFlags: 0

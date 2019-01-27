@@ -15,12 +15,12 @@ public class CameraController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		if (Input.mouseScrollDelta.y > 0) {
-			cam.orthographicSize++;
-		}
-		    else if (Input.mouseScrollDelta.y < 0 && cam.orthographicSize > 1) {
-			    cam.orthographicSize--;
-        }
+		// if (Input.mouseScrollDelta.y > 0) {
+		// 	cam.orthographicSize++;
+		// }
+		//     else if (Input.mouseScrollDelta.y < 0 && cam.orthographicSize > 1) {
+		// 	    cam.orthographicSize--;
+        // }
         
         //follow player
         transform.position = new Vector3(FindObjectOfType<PlayerController>().transform.position.x, transform.position.y, transform.position.z);
