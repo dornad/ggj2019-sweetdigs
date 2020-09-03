@@ -11,5 +11,5 @@ Special thanks to [Konstantin](https://sites.google.com/view/konstantinboyko) fo
 * [Michael](http://linkedin.com/in/calvertcreates) - Audio
 * [Konstantin](https://sites.google.com/view/konstantinboyko) - Design
 * [Karlen](#) - Art
-* [Daniel (me)](http://riotofinvention.com/) - Code
+* [Daniel (me)](https://github.com/dornad) - Code
 * [Ben](#) - Art
